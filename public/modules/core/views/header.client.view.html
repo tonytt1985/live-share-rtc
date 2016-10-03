@@ -1,0 +1,75 @@
+<div class="container" data-ng-controller="HeaderController">
+    <div class="navbar-header page-scroll">
+        <button type="button" data-toggle="collapse" data-target=".navbar-main-collapse"
+                class="navbar-toggle collapsed"><i class="fa fa-tasks"></i></button>
+        <a id="logo" href="/" class="navbar-brand"><img
+                src="http://next-themes.com/mtek/code/frontend/assets/images/logo.png" alt=""
+                class="img-responsive"/></a></div>
+    <div class="navbar-main-collapse collapse navbar-collapse">
+        <ul class="nav nav-pills nav-justified main-menu">
+            <li class="page-scroll"><a href="#page-top">Home</a></li>
+            <li class="page-scroll space-right"><a href="#services">Rooms</a></li>
+            <li class="page-scroll space-left" data-ng-show="authentication.user"><a href="/settings/profile" >Profile</a></li>
+            <li class="page-scroll space-left" data-ng-hide="authentication.user"><a href="/signup">Sign-up</a></li>
+            <li class="page-scroll" data-ng-show="authentication.user"><a href="/signin">Sign-in</a></li>
+            <li class="page-scroll" data-ng-hide="authentication.user"><a href="/logout">Sign-out</a></li>
+        </ul>
+    </div>
+</div>
+<!--<nav id="topbar" role="navigation" class="navbar navbar-default container pln prn" data-ng-controller="HeaderController">
+    <div class="container-fluid pln prn">
+        <div id="topbar-menu" class="navbar-collapse pln prn">
+            <ul class="nav navbar-nav logo-wrapper">
+                <li class="pull-left"><a id="logo" href="/" class="pan"><img src="lib/mtek-theme/assets/images/logo2.png"></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
+                <li class="dropdown"><a data-toggle="dropdown" href="#" class="dropdown-toggle"><i class="icon-user"></i>&nbsp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-user pull-right">
+                        <li>
+                            <div class="navbar-content">
+                                <div class="row">
+                                    <div class="col-md-5 col-xs-5"><img data-ng-src="{{authentication.user.avatar || 'lib/mtek-theme/assets/images/no-avatar.jpg'}}" alt="" class="img-responsive img-circle">
+
+                                        <p class="text-center mtm"><a href="/settings/profile" class="change-avatar">
+                                            <small>Set Avatar</small>
+                                        </a></p>
+                                    </div>
+                                    <div class="col-md-7 col-xs-5"><span data-ng-bind="authentication.user.displayName"></span>
+
+                                        <p class="text-muted small" data-ng-bind="authentication.user.email"></p>
+
+                                        <div class="divider"></div>
+                                        <a href="/settings/profile">
+                                            <button href="/settings/profile" class="btn btn-default btn-sm">Edit Profile
+                                            </button>
+                                        </a></div>
+                                </div>
+                            </div>
+                            <div class="navbar-footer">
+                                <div class="navbar-footer-content">
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-6"><a href="/settings/password">
+                                            <button class="btn btn-default btn-sm">Change Password</button>
+                                        </a></div>
+                                        <div class="col-md-6 col-xs-6"><a href="/signout">
+                                            <button href="/signout" data-ng-click="signout()" class="btn btn-info btn-sm pull-right">Sign Out
+                                            </button>
+                                        </a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
+                <li ui-route="/signup">
+                    <a href="/signup"><i aria-hidden="true" class="icon-users"></i></a>
+                </li>
+                <li ui-route="/signin">
+                    <a href="/signin"><i aria-hidden="true" class="icon-login"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>-->

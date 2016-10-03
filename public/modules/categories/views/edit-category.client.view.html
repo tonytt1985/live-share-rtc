@@ -1,0 +1,37 @@
+<section data-ng-controller="AdminCategoriesController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit Article</h1>
+    </div>
+    <div class="col-md-12">
+        <div data-ng-show="error" class="text-danger">
+            <strong data-ng-bind="error"></strong>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <form name="categoryForm" class="form-horizontal" data-ng-submit="update(categoryForm.$valid)" novalidate>
+            <fieldset>
+                <div class="form-group" ng-class="{ 'has-error' : submitted && categoryForm.title.$invalid}">
+                    <label class="control-label" for="name">Title</label>
+                    <div class="controls">
+                        <input name="name" type="text" data-ng-model="category.name" id="name" class="form-control" placeholder="Category Name" required>
+                    </div>
+                    <div ng-show="submitted && categoryForm.title.$invalid" class="help-block">
+                        <p ng-show="categoryForm.name.$error.required" class="text-danger">Name must be required</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : submitted && categoryForm.description.$invalid}">
+                    <label class="control-label" for="description">Description</label>
+                    <div class="controls">
+                        <textarea name="description" data-ng-model="category.description" id="description" class="form-control" cols="30" rows="10" placeholder="Description" required></textarea>
+                    </div>
+                    <div ng-show="submitted && categoryForm.description.$invalid" class="help-block">
+                        <p ng-show="categoryForm.description.$error.required" class="text-danger">Description must be required</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

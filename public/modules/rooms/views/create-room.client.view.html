@@ -1,0 +1,35 @@
+<section data-ng-controller="AdminRoomsController" data-ng-init="createInit()">
+    <div class="page-header">
+        <h1>New Category</h1>
+    </div>
+    <div class="col-md-12">
+        <div data-ng-show="error" class="text-danger">
+            <strong data-ng-bind="error"></strong>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <form name="roomForm" class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group" ng-class="{ 'has-error': roomForm.title.$dirty && roomForm.title.$invalid }">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input name="name" type="text" data-ng-model="name" id="name" class="form-control" placeholder="Title" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="description">Description</label>
+                    <div class="controls">
+                        <textarea name="description" data-ng-model="description" id="description" class="form-control" cols="30" rows="10" placeholder="Room Description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="category">Category:</label>
+                    <select name="category" id="category" data-ng-options="option.name for option in categories track by option._id" data-ng-model="selectedOption"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,108 @@
+<div id="page-wrapper" data-ng-controller="RoomController" data-ng-init="findOne()">
+    <div class="sidebar-main sidebar">
+        <div class="sidebar-collapse sidebar-scroll">
+            <ul id="sidebar-main" class="nav">
+                <li>
+                    <a id="{{room._id}}" href="javascript:void(0);" data-ng-click="changeChat(room._id)"><i class="fa fa-group"></i>&nbsp;&nbsp;<small>All</small></a>
+                </li>
+                <li data-ng-repeat="u in users | filter: {$: '!'+user._id} track by $index">
+                    <a id="{{u._id}}" href="javascript:void(0);"   data-ng-click="changeChat(u._id)"><img data-ng-src="{{u.avatar || 'lib/mtek-theme/assets/images/no-avatar.jpg'}}" class="avt"/>
+                        <span class="user-status is-online"></span>
+                        <small>{{u.displayName}}</small>
+                        <div class="clearfix"></div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-content" >
+        <div class="page-title-breadcrumb">
+            <div class="page-header pull-left">
+                <div class="page-title">{{room.name}}</div>
+            </div>
+            <div data-ng-if="room._id != currentChat.id" class="page-header pull-right">
+                <button class="btn btn-primary" data-ng-disabled="inCall" data-ng-click="makeCall()">
+                    <i class="fa fa-phone-square"></i>&nbsp;Video Call
+                </button>
+            </div>
+        </div>
+        <div class="box-content">
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="me-chat-box" class="panel-body">
+                            <div id="me-chat-container">
+                                <div class="row" ng-repeat="chat in currentChat.chatContent track by $index" repeat-end="scrollToBottom()">
+                                    <div class="col-sm-10">
+                                        <span class="label {{chat.isMe?'pull-right label-info':'pull-left label-success'}}">{{chat.username}}</span>
+                                        <div class="clearfix"></div>
+                                        <div class="list-group {{chat.isMe?'pull-right':'pull-left'}}">
+                                            <div class="list-group-item">
+                                                <p class="{{chat.isMe?'text-right':''}}" ng-repeat="text in chat.textChat track by $index">{{text}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-sm-2"><span class="label label-default">{{chat.timeStamp}}</span></div>
+                                </div>
+                                <div class="row" id="me-chat-bottom">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-keypress="($event.which === 13)?sendChat():0" ng-model="textChat" placeholder="Input text here...">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-primary btn-circle" ng-click="sendChat()" type="button">SEND</button>
+                                  </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-custom-dialog" tabindex="-1" data-backdrop="static" role="dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content video-width-static">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{callingUser.displayName}}</h4></div>
+                <div class="modal-body" class="">
+                    <video src="{{callingStream}}" autoplay></video>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" data-ng-click="endCall()" class="btn btn-danger">End Call
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-alert" tabindex="-1" role="dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="alert alert-{{modalAlert.type}}">
+                        <div class="alert-icon fa fa-minus-circle"></div>
+                        <div class="alert-content">
+                            <p>{{modalAlert.content}}</p>
+                        </div>
+                    </div>
+                    <div data-ng-i></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-success">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-confirm" tabindex="-1" data-backdrop="static" role="dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body"><img data-ng-src="{{callingUser.avatar || 'lib/mtek-theme/assets/images/no-avatar.jpg'}}" class="avt"/>{{callingUser.displayName}}&nbsp;&nbsp; is calling ...</div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" ng-click="unacceptCall()" class="btn btn-default">Cancel
+                    </button>
+                    <button type="button" data-dismiss="modal" ng-click="acceptCall()" class="btn btn-success">Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
